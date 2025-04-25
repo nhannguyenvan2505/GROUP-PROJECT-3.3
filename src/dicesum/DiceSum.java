@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 public class DiceSum extends DieRoll {
-    private DieRoll r1;
+    private DieRoll r1; // Thêm biến r1 bị thiếu
     private DieRoll r2;
 
     /**
@@ -42,27 +42,12 @@ public class DiceSum extends DieRoll {
     /**
      * Thực hiện tung xúc xắc và trả về kết quả tổng hợp.
      * Refactor: Định dạng lại mã cho rõ ràng hơn.
-     * Thêm chức năng: Validate kết quả của từng lần tung để tránh lỗi runtime.
-     * - Kiểm tra kết quả không được null.
-     * - (Tùy chọn) Kiểm tra giá trị xúc xắc hợp lệ nếu RollResult có phương thức getValue().
      */
+    
     @Override
     public RollResult makeRoll() {
         RollResult result1 = r1.makeRoll();
         RollResult result2 = r2.makeRoll();
-
-        // Validate: Kiểm tra kết quả của từng lần tung
-        if (result1 == null || result2 == null) {
-            throw new IllegalStateException("Kết quả tung xúc xắc không được null");
-        }
-
-        // (Tùy chọn) Kiểm tra giá trị xúc xắc nếu RollResult có phương thức getValue()
-        // Giả sử RollResult có phương thức getValue() trả về giá trị xúc xắc (thường từ 1 đến 6)
-        // Nếu không có phương thức này, bạn có thể bỏ phần kiểm tra này
-        if (result1.getValue() <= 0 || result2.getValue() <= 0) {
-            throw new IllegalStateException("Giá trị xúc xắc phải lớn hơn 0");
-        }
-
         return result1.andThen(result2);
     }
 
@@ -72,6 +57,7 @@ public class DiceSum extends DieRoll {
      * - Sửa lỗi cú pháp: r1toString() -> r1.toString().
      * - Định dạng lại chuỗi cho dễ đọc.
      */
+    
     @Override
     public String toString() {
         return r1.toString() + " & " + r2.toString();
