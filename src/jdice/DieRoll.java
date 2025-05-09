@@ -17,10 +17,10 @@ public class DieRoll {
     }
 
     public DieRoll(int ndice, int nsides, int bonus) {
-        // if (ndice <= 0 || nsides <= 0) {
-        //     logger.severe("Invalid dice configuration: ndice and nsides must be > 0");
-        //     throw new IllegalArgumentException("Number of dice and sides must be greater than 0.");
-        // }
+        if (ndice <= 0 || nsides <= 0) {
+            logger.severe("Invalid dice configuration: ndice and nsides must be > 0");
+            throw new IllegalArgumentException("Number of dice and sides must be greater than 0.");
+        }
 
         this.ndice = ndice;
         this.nsides = nsides;
